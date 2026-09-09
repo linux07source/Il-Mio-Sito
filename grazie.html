@@ -20,27 +20,48 @@
 <body class="text-gray-200 font-sans antialiased min-h-screen flex flex-col items-center justify-center p-4">
 
     <div
-        class="bg-[#0f172a]/90 border border-blue-900/60 p-8 rounded-2xl text-center max-w-lg shadow-2xl backdrop-blur">
+        class="bg-[#0f172a]/90 border border-blue-900/60 p-8 rounded-2xl text-center max-w-lg shadow-2xl backdrop-blur w-full">
         <div
             class="w-16 h-16 bg-blue-600/20 text-blue-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl border border-blue-500/30">
             <i class="fa-solid fa-check"></i>
         </div>
         <h1 class="text-2xl font-bold text-white mb-2">Pagamento completato con successo!</h1>
         <p class="text-gray-300 text-sm mb-6 leading-relaxed">
-            Grazie per aver acquistato <span class="text-cyan-400 font-semibold">SSH-Manager</span>. Clicca sul pulsante
-            qui sotto per scaricare subito il pacchetto `.deb`.
+            Grazie per il tuo supporto! Scegli il file corrispondente al prodotto che hai acquistato per avviare il
+            download immediato.
         </p>
 
-        <!-- Pulsante di download diretto dalla cartella repo/ -->
-        <a href="repo/SSH-Manager.deb" download
-            class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg shadow-blue-600/30 inline-flex items-center space-x-2">
-            <i class="fa-solid fa-download"></i>
-            <span>Scarica SSH-Manager.deb</span>
-        </a>
+        <!-- Container dei pulsanti di download -->
+        <div class="flex flex-col gap-4">
+            <!-- Download SSH-Manager -->
+            <div
+                class="bg-cppDark/60 border border-blue-900/40 p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3">
+                <span class="text-sm font-semibold text-white">SSH-Manager <span
+                        class="text-xs text-cyan-400 font-mono">(.deb)</span></span>
+                <a href="repo/SSH-Manager.deb" download
+                    class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition shadow-md inline-flex items-center space-x-2 w-full sm:w-auto justify-center">
+                    <i class="fa-solid fa-download"></i>
+                    <span>Scarica</span>
+                </a>
+            </div>
+
+            <!-- Download Lib-Ping -->
+            <div
+                class="bg-cppDark/60 border border-blue-900/40 p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3">
+                <span class="text-sm font-semibold text-white">Lib-Ping <span
+                        class="text-xs text-cyan-400 font-mono">(.zip / libreria)</span></span>
+                <a href="repo/Lib-Ping.zip" download
+                    class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition shadow-md inline-flex items-center space-x-2 w-full sm:w-auto justify-center">
+                    <i class="fa-solid fa-download"></i>
+                    <span>Scarica</span>
+                </a>
+            </div>
+        </div>
 
         <div class="mt-8 pt-4 border-t border-blue-900/40 text-xs text-gray-400">
-            <p>Salva il file in un luogo sicuro. In caso di problemi, contatta il supporto.</p>
-            <a href="index.html" class="text-cyan-400 hover:underline mt-2 inline-block">← Torna alla Home</a>
+            <p>Salva i file in un luogo sicuro. In caso di problemi, contatta il supporto.</p>
+            <a href="index.html" class="text-cyan-400 hover:underline mt-2 inline-block font-medium">← Torna alla
+                Home</a>
         </div>
     </div>
 
