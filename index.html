@@ -110,26 +110,26 @@
             <div
                 class="flex flex-col sm:flex-row justify-between items-center gap-4 bg-cppCard/80 border border-blue-900/40 p-4 rounded-2xl backdrop-blur">
                 <div class="relative w-full sm:w-72">
-                    <input type="text" placeholder="Cerca repository..."
+                    <input type="text" id="searchInput" placeholder="Cerca repository..."
                         class="w-full bg-cppDark border border-blue-900/60 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-cppCyan shadow-inner">
                 </div>
                 <div class="flex space-x-2 w-full sm:w-auto">
-                    <button
-                        class="bg-cppBlue text-white text-xs font-medium px-4 py-2 rounded-xl shadow-md transition">Tutti</button>
-                    <button
-                        class="bg-cppCard hover:bg-cppCardHover border border-blue-900/40 text-gray-400 text-xs font-medium px-4 py-2 rounded-xl hover:text-white transition">Gratuiti</button>
-                    <button
-                        class="bg-cppCard hover:bg-cppCardHover border border-blue-900/40 text-gray-400 text-xs font-medium px-4 py-2 rounded-xl hover:text-white transition">A
+                    <button data-filter="all"
+                        class="filter-btn bg-cppBlue text-white text-xs font-medium px-4 py-2 rounded-xl shadow-md transition">Tutti</button>
+                    <button data-filter="free"
+                        class="filter-btn bg-cppCard hover:bg-cppCardHover border border-blue-900/40 text-gray-400 text-xs font-medium px-4 py-2 rounded-xl hover:text-white transition">Gratuiti</button>
+                    <button data-filter="paid"
+                        class="filter-btn bg-cppCard hover:bg-cppCardHover border border-blue-900/40 text-gray-400 text-xs font-medium px-4 py-2 rounded-xl hover:text-white transition">A
                         pagamento</button>
                 </div>
             </div>
 
             <!-- Lista dei Repo -->
-            <div class="grid grid-cols-1 gap-4">
+            <div id="repoList" class="grid grid-cols-1 gap-4">
 
                 <!-- REPO 1: SSH-Manager (Premium 1.99€) -->
-                <div
-                    class="bg-cppCard/90 border border-blue-900/50 rounded-2xl p-6 flex flex-col justify-between hover:border-cppCyan transition-all shadow-xl relative overflow-hidden group">
+                <div data-category="paid"
+                    class="repo-card bg-cppCard/90 border border-blue-900/50 rounded-2xl p-6 flex flex-col justify-between hover:border-cppCyan transition-all shadow-xl relative overflow-hidden group">
                     <div
                         class="absolute top-0 right-0 bg-gradient-to-l from-blue-600 to-cyan-500 text-white text-[11px] font-bold px-4 py-1 rounded-bl-xl uppercase tracking-wider shadow">
                         Premium • €1.99
@@ -168,11 +168,11 @@
                 </div>
 
                 <!-- REPO 2: Lib-Ping (Premium 0,30€) -->
-                <div
-                    class="bg-cppCard/90 border border-blue-900/50 rounded-2xl p-6 flex flex-col justify-between hover:border-cppCyan transition-all shadow-xl relative overflow-hidden group">
+                <div data-category="paid"
+                    class="repo-card bg-cppCard/90 border border-blue-900/50 rounded-2xl p-6 flex flex-col justify-between hover:border-cppCyan transition-all shadow-xl relative overflow-hidden group">
                     <div
                         class="absolute top-0 right-0 bg-gradient-to-l from-blue-600 to-cyan-500 text-white text-[11px] font-bold px-4 py-1 rounded-bl-xl uppercase tracking-wider shadow">
-                        Premium • €0,00
+                        Premium • €0,30
                     </div>
                     <div>
                         <div class="flex items-center space-x-2 mb-2">
@@ -205,8 +205,8 @@
                 </div>
 
                 <!-- REPO 3: C++ Compile (Gratuito) -->
-                <div
-                    class="bg-cppCard/90 border border-blue-900/50 rounded-2xl p-6 flex flex-col justify-between hover:border-cppCyan transition-all shadow-xl">
+                <div data-category="free"
+                    class="repo-card bg-cppCard/90 border border-blue-900/50 rounded-2xl p-6 flex flex-col justify-between hover:border-cppCyan transition-all shadow-xl">
                     <div>
                         <div class="flex items-center space-x-2 mb-2">
                             <i class="fa-solid fa-book-bookmark text-cppCyan"></i>
@@ -251,6 +251,52 @@
         </div>
         <p>© 2026 Progetto C++ Hub • Codice oggi, grandi idee domani.</p>
     </footer>
+
+    <!-- Script per la ricerca e i filtri -->
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const repoCards = document.querySelectorAll('.repo-card');
+
+        let currentFilter = 'all';
+
+        function filterRepositories() {
+            const query = searchInput.value.toLowerCase().trim();
+
+            repoCards.forEach(card => {
+                const textContent = card.innerText.toLowerCase();
+                const category = card.getAttribute('data-category');
+
+                const matchesSearch = textContent.includes(query);
+                const matchesFilter = (currentFilter === 'all') || (category === currentFilter);
+
+                if (matchesSearch && matchesFilter) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Ascolta l'input nella barra di ricerca
+        searchInput.addEventListener('input', filterRepositories);
+
+        // Gestione dei bottoni di filtro
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Rimuove lo stile attivo da tutti i bottoni
+                filterBtns.forEach(b => {
+                    b.className = "filter-btn bg-cppCard hover:bg-cppCardHover border border-blue-900/40 text-gray-400 text-xs font-medium px-4 py-2 rounded-xl hover:text-white transition";
+                });
+
+                // Applica lo stile attivo al bottone cliccato
+                btn.className = "filter-btn bg-cppBlue text-white text-xs font-medium px-4 py-2 rounded-xl shadow-md transition";
+
+                currentFilter = btn.getAttribute('data-filter');
+                filterRepositories();
+            });
+        });
+    </script>
 
 </body>
 
