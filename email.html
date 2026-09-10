@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="it" class="dark">
+
+<head>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 640 512%22><path fill=%22%2300d2ff%22 d=%22M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.2 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z%22/></svg>">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Richiedi Programma Personalizzato • C++ Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cppDark: '#070b19',
+                        cppCard: '#0f172a',
+                        cppCardHover: '#1e293b',
+                        cppBorder: '#1e3a8a',
+                        cppBlue: '#0066ff',
+                        cppCyan: '#00d2ff',
+                        cppAccent: '#8b5cf6'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome per le icone -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Sfondo personalizzato con overlay scuro */
+        body {
+            background-image: linear-gradient(to bottom, rgba(7, 11, 25, 0.85), rgba(7, 11, 25, 0.95)), url('image.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animazioni personalizzate */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Effetto caduta in loop (stile vene/gocce) */
+        .falling-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .falling-drop {
+            position: absolute;
+            background: linear-gradient(to bottom, rgba(0, 210, 255, 0.8), rgba(0, 102, 255, 0));
+            width: 2px;
+            height: 35px;
+            opacity: 0.6;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 0.8;
+            }
+
+            80% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(105vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="text-gray-200 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Container animazione caduta in loop -->
+    <div class="falling-container">
+        <div class="falling-drop" style="left: 5%; animation-duration: 3.2s; animation-delay: 0s;"></div>
+        <div class="falling-drop" style="left: 15%; animation-duration: 4.5s; animation-delay: 1.2s;"></div>
+        <div class="falling-drop" style="left: 28%; animation-duration: 3.8s; animation-delay: 0.5s;"></div>
+        <div class="falling-drop" style="left: 42%; animation-duration: 5.1s; animation-delay: 2.1s;"></div>
+        <div class="falling-drop" style="left: 55%; animation-duration: 3.5s; animation-delay: 0.8s;"></div>
+        <div class="falling-drop" style="left: 68%; animation-duration: 4.2s; animation-delay: 1.6s;"></div>
+        <div class="falling-drop" style="left: 82%; animation-duration: 3.9s; animation-delay: 0.2s;"></div>
+        <div class="falling-drop" style="left: 92%; animation-duration: 4.8s; animation-delay: 2.5s;"></div>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header
+        class="border-b border-blue-900/40 bg-cppDark/80 backdrop-blur-md sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3 group cursor-pointer" onclick="window.location.href='index.html'">
+                <div
+                    class="bg-cppBlue text-white p-2 rounded-lg shadow-lg shadow-blue-500/30 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                    <i class="fa-solid fa-terminal text-xl"></i>
+                </div>
+                <div>
+                    <span class="font-extrabold text-lg text-white tracking-wide">My <span
+                            class="text-cppCyan">Github</span></span>
+                    <p class="text-[10px] text-blue-400 tracking-wider uppercase font-semibold">Codifica • Compila •
+                        Crea</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-6 text-sm">
+                <a href="index.html"
+                    class="hover:text-cppCyan transition-colors duration-200 font-medium flex items-center space-x-1">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Torna alla Home</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-2xl mx-auto px-4 py-12 w-full relative z-10">
+        <div
+            class="bg-cppCard/90 border border-blue-900/50 p-8 rounded-2xl backdrop-blur shadow-2xl opacity-0 animate-fade-in">
+
+            <div class="text-center mb-8">
+                <div
+                    class="inline-flex bg-cppBlue/20 text-cppCyan p-3 rounded-2xl mb-3 border border-cppCyan/30 shadow-inner">
+                    <i class="fa-solid fa-code text-2xl"></i>
+                </div>
+                <h1 class="text-2xl font-bold text-white tracking-wide">Richiedi un Programma C++</h1>
+                <p class="text-xs text-gray-300 mt-2">
+                    Compila il modulo sottostante con i dettagli del software o script personalizzato di cui hai
+                    bisogno. Riceverai una risposta e un preventivo via email.
+                </p>
+            </div>
+
+            <!-- Form di invio (Sostituisci l'attributo action con il tuo endpoint gratuito es. https://formspree.io/f/tuo_id) -->
+            <form action="https://formspree.io/f/mqpkndnp" method="POST" class="space-y-5">
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Il tuo Nome o
+                        Nickname</label>
+                    <input type="text" name="nome" required placeholder="Es. Mario Rossi"
+                        class="w-full bg-cppDark border border-blue-900/60 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cppCyan focus:ring-2 focus:ring-cppCyan/20 transition-all shadow-inner">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">La tua
+                        Email</label>
+                    <input type="email" name="email" required placeholder="tuamail@esempio.com"
+                        class="w-full bg-cppDark border border-blue-900/60 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cppCyan focus:ring-2 focus:ring-cppCyan/20 transition-all shadow-inner">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Tipo di
+                        Richiesta / Budget</label>
+                    <select name="tipo_richiesta"
+                        class="w-full bg-cppDark border border-blue-900/60 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cppCyan focus:ring-2 focus:ring-cppCyan/20 transition-all shadow-inner">
+                        <option value="Script CLI Semplice">Script CLI Semplice (Gratuito / Economico)</option>
+                        <option value="Tool in C++ Avanzato">Tool in C++ Avanzato (Personalizzato)</option>
+                        <option value="Libreria o Modulo Dedicato">Libreria o Modulo Dedicato</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Descrizione
+                        Dettagliata del Programma</label>
+                    <textarea name="messaggio" rows="5" required
+                        placeholder="Descrivi cosa deve fare il programma, le funzionalità desiderate, i sistemi operativi supportati (es. Linux/Ubuntu)..."
+                        class="w-full bg-cppDark border border-blue-900/60 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cppCyan focus:ring-2 focus:ring-cppCyan/20 transition-all shadow-inner resize-none"></textarea>
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-cppBlue hover:bg-blue-600 text-white font-semibold py-3.5 rounded-xl transition-all duration-200 shadow-lg shadow-blue-600/30 hover:scale-[1.02] active:scale-95 flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>Invia Richiesta Programma</span>
+                </button>
+
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contatti"
+        class="border-t border-blue-900/40 mt-16 py-8 text-center text-xs text-gray-400 bg-cppDark/90 backdrop-blur relative z-10">
+        <div class="flex justify-center space-x-6 text-lg text-cppCyan mb-3">
+            <a href="https://www.instagram.com/l30.nrd"
+                class="hover:text-white transition-transform duration-200 hover:scale-125"><i
+                    class="fa-brands fa-instagram"></i></a>
+        </div>
+        <p>© 2026 Progetto C++ Hub • Codice oggi, grandi idee domani.</p>
+    </footer>
+
+</body>
+
+</html>
