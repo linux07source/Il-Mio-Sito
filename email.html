@@ -186,8 +186,8 @@
                     </select>
                 </div>
 
-
-                <div>
+                <!-- Blocco Sistema Operativo (nascondibile) -->
+                <div id="bloccoSistemaOperativo">
                     <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Tipo di
                         sistema operativo</label>
                     <select name="sistema_operativo"
@@ -246,22 +246,28 @@
             const containerProgramma = document.getElementById('campoProgramma');
             const inputProgramma = document.getElementById('inputProgramma');
 
+            const bloccoOS = document.getElementById('bloccoSistemaOperativo');
+
             if (selectElem.value === 'Assistenza') {
-                // Mostra assistenza, nascondi programma
+                // Mostra assistenza, nascondi programma e sistema operativo
                 containerAssistenza.classList.remove('hidden');
                 inputAssistenza.setAttribute('required', 'true');
 
                 containerProgramma.classList.add('hidden');
                 inputProgramma.removeAttribute('required');
                 inputProgramma.value = '';
+
+                bloccoOS.classList.add('hidden');
             } else {
-                // Mostra programma, nascondi assistenza
+                // Mostra programma e sistema operativo, nascondi assistenza
                 containerAssistenza.classList.add('hidden');
                 inputAssistenza.removeAttribute('required');
                 inputAssistenza.value = '';
 
                 containerProgramma.classList.remove('hidden');
                 inputProgramma.setAttribute('required', 'true');
+
+                bloccoOS.classList.remove('hidden');
             }
         }
     </script>
