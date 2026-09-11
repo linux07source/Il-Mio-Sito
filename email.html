@@ -3,7 +3,7 @@
 
 <head>
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 640 512%22><path fill=%22%2300d2ff%22 d=%22M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.2 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z%22/></svg>">
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 640 512%22><path fill=%22%2300d2ff%22 d=%22M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.2 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c-12.5-12.5-12.5-32.8 0-45.3z%22/></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Richiedi Programma Personalizzato • C++ Hub</title>
@@ -157,7 +157,7 @@
                 </p>
             </div>
 
-            <!-- Form di invio (Sostituisci l'attributo action con il tuo endpoint gratuito es. https://formspree.io/f/tuo_id) -->
+            <!-- Form di invio -->
             <form action="https://formspree.io/f/mqpkndnp" method="POST" class="space-y-5">
 
                 <div>
@@ -177,11 +177,12 @@
                 <div>
                     <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Tipo di
                         Richiesta / Budget</label>
-                    <select name="tipo_richiesta"
+                    <select id="tipoRichiesta" name="tipo_richiesta" onchange="gestisciCampi(this)"
                         class="w-full bg-cppDark border border-blue-900/60 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cppCyan focus:ring-2 focus:ring-cppCyan/20 transition-all shadow-inner">
                         <option value="Script CLI Semplice">Script CLI Semplice (Gratuito / Economico)</option>
                         <option value="Tool in C++ Avanzato">Tool in C++ Avanzato (Personalizzato)</option>
                         <option value="Libreria o Modulo Dedicato">Libreria o Modulo Dedicato</option>
+                        <option value="Assistenza">Assistenza</option>
                     </select>
                 </div>
 
@@ -197,10 +198,20 @@
                     </select>
                 </div>
 
-                <div>
+                <!-- Campo Assistenza (visibile solo se si sceglie Assistenza) -->
+                <div id="campoAssistenza" class="hidden">
+                    <label class="block text-xs font-semibold text-cppCyan uppercase tracking-wider mb-2">Dettagli
+                        Assistenza</label>
+                    <textarea id="inputAssistenza" name="dettagli_assistenza" rows="3"
+                        placeholder="Descrivi le tue esigenze di assistenza."
+                        class="w-full bg-cppDark border border-cppCyan/60 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cppCyan focus:ring-2 focus:ring-cppCyan/20 transition-all shadow-inner resize-none"></textarea>
+                </div>
+
+                <!-- Campo Descrizione Programma (visibile per le altre 3 opzioni) -->
+                <div id="campoProgramma">
                     <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Descrizione
                         Dettagliata del Programma</label>
-                    <textarea name="messaggio" rows="5" required
+                    <textarea id="inputProgramma" name="messaggio" rows="5" required
                         placeholder="Descrivi cosa deve fare il programma, le funzionalità desiderate."
                         class="w-full bg-cppDark border border-blue-900/60 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cppCyan focus:ring-2 focus:ring-cppCyan/20 transition-all shadow-inner resize-none"></textarea>
                 </div>
@@ -225,6 +236,35 @@
         </div>
         <p>© 2026 Progetto C++ Hub • Codice oggi, grandi idee domani.</p>
     </footer>
+
+    <!-- Script per alternare la visibilità dei campi -->
+    <script>
+        function gestisciCampi(selectElem) {
+            const containerAssistenza = document.getElementById('campoAssistenza');
+            const inputAssistenza = document.getElementById('inputAssistenza');
+
+            const containerProgramma = document.getElementById('campoProgramma');
+            const inputProgramma = document.getElementById('inputProgramma');
+
+            if (selectElem.value === 'Assistenza') {
+                // Mostra assistenza, nascondi programma
+                containerAssistenza.classList.remove('hidden');
+                inputAssistenza.setAttribute('required', 'true');
+
+                containerProgramma.classList.add('hidden');
+                inputProgramma.removeAttribute('required');
+                inputProgramma.value = '';
+            } else {
+                // Mostra programma, nascondi assistenza
+                containerAssistenza.classList.add('hidden');
+                inputAssistenza.removeAttribute('required');
+                inputAssistenza.value = '';
+
+                containerProgramma.classList.remove('hidden');
+                inputProgramma.setAttribute('required', 'true');
+            }
+        }
+    </script>
 
 </body>
 
